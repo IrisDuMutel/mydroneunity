@@ -39,7 +39,7 @@ public class BasicControl : MonoBehaviour
             i++;
             Transform t = motor.GetComponent<Transform>();
             //			Debug.Log (i);
-            //			Debug.Log (motor.UpForce);
+            // Debug.Log (motor.UpForce);
             rb.AddForceAtPosition(transform.up * motor.UpForce, t.position, ForceMode.Impulse);
         }
         rb.AddTorque(Vector3.up * yaw, ForceMode.Force);

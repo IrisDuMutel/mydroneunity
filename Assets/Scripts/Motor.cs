@@ -26,11 +26,12 @@ public class Motor : MonoBehaviour
 	{
 		float UpForceThrottle = Mathf.Clamp(mainController.ThrottleValue, 0, 1) * Power;
 		float UpForceTotal = UpForceThrottle;
+		Debug.Log(Mathf.Clamp(mainController.ThrottleValue, 0, 1) * 0.0f);
 		UpForceTotal -= mainController.Computer.PitchCorrection * PitchFactor;
 		UpForceTotal -= mainController.Computer.RollCorrection * RollFactor;
 
 		UpForce = UpForceTotal;
-		Debug.Log(UpForce);
+		// Debug.Log(UpForce);
 
 		SideForce = PreNormalize(mainController.Controller.Yaw, YawFactor);
 
@@ -38,6 +39,7 @@ public class Motor : MonoBehaviour
 		UpdatePropeller(SpeedPropeller);
 	}
 
+	// Only animation of the propellers
 	public void UpdatePropeller(float speed)
 	{
 		if (InvertDirection)
