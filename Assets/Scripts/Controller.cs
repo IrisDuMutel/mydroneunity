@@ -32,6 +32,22 @@ public class Controller : MonoBehaviour
     public string RollCommand = "Roll";
     public bool InvertRoll = true;
 
+    // void Start() 
+    // {
+    //     ROSConnection.instance.Subscribe<Twist>("cmd_vel", Vel_callback);
+    // }
+    
+    // void Vel_callback(Twist data)
+    // {
+    //    vel_x = (float)data.linear.x;
+    //    vel_y = data.linear.y;
+    //    vel_z = data.linear.z;
+    //    ang_x = data.angular.x;
+    //    ang_y = data.angular.y;
+    //    ang_z = data.angular.z;
+
+    // }
+
     void Update()
     {
         if (!isAgentControl)
