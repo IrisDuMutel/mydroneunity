@@ -634,6 +634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneParent
       objectReference: {fileID: 0}
+    - target: {fileID: 8343037594431465023, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037594440864008, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08
@@ -646,9 +650,21 @@ PrefabInstance:
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 1120803645}
+    - target: {fileID: 8343037594517727197, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037595030577769, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006717, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595691710103, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
