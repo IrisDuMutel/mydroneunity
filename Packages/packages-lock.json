@@ -37,6 +37,20 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.robotics.ros-tcp-connector": {
+      "version": "https://github.com/Unity-Technologies/ROS-TCP-Connector.git#v0.1.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ab45157ad3c11a5bce500ec181c2472895cd54dd"
+    },
+    "com.unity.robotics.urdf-importer": {
+      "version": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5ba94b3aac837b86468ebb7c460f26524f6b7e53"
+    },
     "com.unity.test-framework": {
       "version": "1.1.20",
       "depth": 0,
