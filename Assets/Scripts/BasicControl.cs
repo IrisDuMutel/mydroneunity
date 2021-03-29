@@ -5,6 +5,11 @@ using RosMessageTypes.RoboticsDemo;
 
 public class BasicControl : MonoBehaviour
 {
+    private float FLM_force;
+    private float FRM_force;
+    private float RLM_force;
+    private float RRM_force;
+    private float yaw_value;
 
     [Header("Control")]
     public Controller Controller;
@@ -22,10 +27,10 @@ public class BasicControl : MonoBehaviour
     void Start() 
     {
         if (UseROS)
-            ROSConnection.instance.Subscribe<MotorForces>("motorForce", Force_callback);
+            ROSConnection.instance.Subscribe<QuadForce>("motorForce", Force_callback);
     }
     
-    void Force_callback(MotorForces data)
+    void Force_callback(QuadForce data)
     {
        FLM_force = data.flm;
        FRM_force = data.frm;
@@ -43,7 +48,10 @@ public class BasicControl : MonoBehaviour
     {   
         if (UseROS)
         {
-            
+            ComputeMotorsROS();
+            if (Computer != null)
+                Computer.UpdateGyro();
+            ComputeMotorSpeeds();
         }
 
         else
@@ -67,16 +75,49 @@ public class BasicControl : MonoBehaviour
         int i = 0;
         foreach (Motor motor in Motors)
         {
-            motor.UpdateForceValues();
-            yaw += PreNormalize(yaw_value, 0.0f);
-            i++;
             Transform t = motor.GetComponent<Transform>();
+
+            if (motor.name.Contains("F"))
+            {
+                if (motor.name.Contains("FL"))
+                {
+                    rb.AddForceAtPosition(transform.up * FLM_force, t.position, ForceMode.Impulse);
+                }
+                if (motor.name.Contains("FR"))
+                {
+                    rb.AddForceAtPosition(transform.up * FRM_force, t.position, ForceMode.Impulse);                    
+                }
+            if (motor.name.Contains("RL"))
+            {
+                rb.AddForceAtPosition(transform.up * RLM_force, t.position, ForceMode.Impulse);
+            }
+            if (motor.name.Contains("RR"))
+            {
+                rb.AddForceAtPosition(transform.up * RRM_force, t.position, ForceMode.Impulse);
+            }
+            }
+            // motor.UpdateForceValues();
+            yaw += YawNormalize(motor,yaw_value, 0.0f);
+            i++;
+            
             //			Debug.Log (i);
             // Debug.Log (motor.UpForce);
-            rb.AddForceAtPosition(transform.up * motor.UpForce, t.position, ForceMode.Impulse);
+            
         }
         rb.AddTorque(Vector3.up * yaw, ForceMode.Force);
     }
+
+private float YawNormalize(Motor motor,float input, float factor)
+	{
+		float finalValue = input;
+
+		if (motor.InvertDirection)
+			finalValue = Mathf.Clamp(finalValue, -1, 0);
+		else
+			finalValue = Mathf.Clamp(finalValue, 0, 1);
+
+		return finalValue * (factor);
+	}
 
     private void ComputeMotors()
     {
