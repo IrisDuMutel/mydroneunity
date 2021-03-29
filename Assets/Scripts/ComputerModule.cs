@@ -23,10 +23,6 @@ public class ComputerModule : MonoBehaviour
 
     public void UpdateComputer(float ControlPitch, float ControlRoll, float ControlHeight)
     {
-        //		string cp = ControlPitch.ToString();
-        //		int ip = int.Parse (cp);
-        //		string cr = ControlRoll.ToString();
-        //		int ir = int.Parse (cr);
         UpdateGyro();
         PitchCorrection = PidPitch.Update(ControlPitch * PitchLimit, Gyro.Pitch, Time.deltaTime);
         RollCorrection = PidRoll.Update(Gyro.Roll, ControlRoll * RollLimit, Time.deltaTime);
