@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RosMessageTypes.RoboticsDemo;
 
 // Used by BasicControl.cs
 // This script is in charge of getting the commands from user and saving them inside
 // its own variables for later use.
 public class Controller : MonoBehaviour
 {
+    // To use ROS command in: roll, pitch, yaw and vertical vel
+    private float roll_command;
+    private float pitch_command;
+    private float yaw_command;
+    private float h_vel_command;
     public bool isAgentControl = false; // For when using RL
 
     public float Throttle = 0.0f;
     public float Yaw = 0.0f;
     public float Roll = 0.0f;
     public float Pitch = 0.0f;
+    public BasicControl BasicControl;
 
     public enum ThrottleMode { None, LockHeight}
 
@@ -31,26 +38,36 @@ public class Controller : MonoBehaviour
     [Header("Roll Command")]
     public string RollCommand = "Roll";
     public bool InvertRoll = true;
-
-    // void Start() 
-    // {
-    //     ROSConnection.instance.Subscribe<Twist>("cmd_vel", Vel_callback);
-    // }
     
-    // void Vel_callback(Twist data)
-    // {
-    //    vel_x = (float)data.linear.x;
-    //    vel_y = data.linear.y;
-    //    vel_z = data.linear.z;
-    //    ang_x = data.angular.x;
-    //    ang_y = data.angular.y;
-    //    ang_z = data.angular.z;
-
-    // }
+    void Start() 
+    {
+        if (BasicControl.UseROSCommands)
+        {
+            ROSConnection.instance.Subscribe<QuadComm>("QuadCommands", Comm_callback);
+        }
+    }
+    
+    void Comm_callback(QuadComm data)
+    {
+        roll_command = data.roll;
+        pitch_command = data.pitch;
+        yaw_command = data.yaw;
+        h_vel_command = data.h_vel;
+       
+    }
 
     void Update()
     {
-        if (!isAgentControl)
+        if (BasicControl.UseROSCommands)
+        {
+            Throttle = h_vel_command;
+            Yaw = yaw_command;
+            Pitch = pitch_command;
+            Roll = roll_command;
+            Debug.Log("AAAAAA");
+        }
+        // if (!isAgentControl)
+        else
         {
             Throttle = Input.GetAxisRaw(ThrottleCommand) * (InvertThrottle ? -1 : 1);
             Yaw = Input.GetAxisRaw(YawCommand) * (InvertYaw ? -1 : 1);
@@ -60,6 +77,7 @@ public class Controller : MonoBehaviour
     }
     public void InputAction(float throttle, float pitch, float roll, float yaw)
     {
+
         if (isAgentControl)
         {
             Throttle = throttle;

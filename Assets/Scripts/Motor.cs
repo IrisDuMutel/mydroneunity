@@ -43,9 +43,10 @@ public class Motor : MonoBehaviour
 	public void UpdatePropeller(float speed)
 	{
 		if (InvertDirection)
-			Propeller.transform.Rotate( 0.0f,-SpeedPropeller * 2 * Time.deltaTime,0.0f);
+		
+			Propeller.transform.RotateAround(Propeller.transform.position, transform.up, -SpeedPropeller * 2 * Time.deltaTime);
 		else
-			Propeller.transform.Rotate(0.0f,SpeedPropeller * 2 * Time.deltaTime,0.0f);
+			Propeller.transform.RotateAround(Propeller.transform.position, transform.up,  SpeedPropeller * 2 * Time.deltaTime);
 
 		
 	}
