@@ -734,7 +734,7 @@ PrefabInstance:
       objectReference: {fileID: 93930054}
     - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: ThrottleValue
-      value: 1000
+      value: 1234
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: UseROSCommands
