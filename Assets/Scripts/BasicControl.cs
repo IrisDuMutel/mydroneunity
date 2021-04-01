@@ -14,6 +14,7 @@ public class BasicControl : MonoBehaviour
 
     // To use ROS command in: roll, pitch, yaw and vertical vel
     private float roll_command;
+    
     private float pitch_command;
     private float yaw_command;
     private float h_vel_command;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,7 @@ MonoBehaviour:
   Yaw: 0
   Roll: 0
   Pitch: 0
+  BasicControl: {fileID: 1980646122}
   ThrottleCommand: Throttle
   InvertThrottle: 0
   YawCommand: Yaw
@@ -207,7 +208,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.8679245, g: 0.7920534, b: 0.76557493, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -375,11 +376,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8343037594343694437, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
   m_PrefabInstance: {fileID: 8343037594536486743}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1894757430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8343037594343694457, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1894757431 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8343037594343694456, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1894757433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894757430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41347102d117d214eab577d951e78072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1894757431}
+  _transform: {fileID: 1636803824}
+  cube: {fileID: 1894757430}
+  publishMessageFrequency: 0.5
 --- !u!1 &1961043252 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8343037594517727197, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
   m_PrefabInstance: {fileID: 8343037594536486743}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1980646122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894757430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6726182dcce25624ab166567fefb8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1983062782
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +656,10 @@ PrefabInstance:
       propertyPath: Controller
       value: 
       objectReference: {fileID: 93930054}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: UseROSCommands
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: PidThrottle.pFactor
       value: 0.5
@@ -626,6 +668,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneParent
       objectReference: {fileID: 0}
+    - target: {fileID: 8343037594431465020, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 556986241603002400, guid: 20be38637cbb82472a2fbe08333410ba, type: 3}
     - target: {fileID: 8343037594440864008, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08
@@ -638,10 +684,38 @@ PrefabInstance:
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 1120803645}
+    - target: {fileID: 8343037594517727194, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 556986241603002400, guid: 20be38637cbb82472a2fbe08333410ba, type: 3}
     - target: {fileID: 8343037595030577769, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006714, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006714, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006714, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006714, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595402006714, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 556986241603002400, guid: 20be38637cbb82472a2fbe08333410ba, type: 3}
+    - target: {fileID: 8343037595691710100, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 556986241603002400, guid: 20be38637cbb82472a2fbe08333410ba, type: 3}
     - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
       value: 

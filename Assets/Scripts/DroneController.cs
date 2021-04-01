@@ -9,7 +9,6 @@ public class DroneController : MonoBehaviour
     public GameObject RearLeftMotor;
     public GameObject RearRightMotor;
     public Rigidbody rb;
-
     public float throttleVal = 0f;
     public float sensitivity = 0.1f;
 
