@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658828, g: 0.49642313, b: 0.57482547, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,7 @@ MonoBehaviour:
   Yaw: 0
   Roll: 0
   Pitch: 0
+  BasicControl: {fileID: 8343037594536486744}
   ThrottleCommand: Throttle
   InvertThrottle: 0
   YawCommand: Yaw
@@ -189,6 +190,17 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 8343037594343694456, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
   m_PrefabInstance: {fileID: 8343037594536486743}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &615944582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615944580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e1ee27c892549478c3d6220211c5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &615944584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 615944581}
-  _transform: {fileID: 1504442274}
-  cube: {fileID: 1504442273}
+  _transform: {fileID: 1636803824}
+  cube: {fileID: 615944580}
   publishMessageFrequency: 0.5
 --- !u!1 &705507993
 GameObject:
@@ -394,16 +406,6 @@ GameObject:
 --- !u!1 &1120803645 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8343037595691710103, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
-  m_PrefabInstance: {fileID: 8343037594536486743}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1504442273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8813420076483445832, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
-  m_PrefabInstance: {fileID: 8343037594536486743}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1504442274 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8143737868463365874, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
   m_PrefabInstance: {fileID: 8343037594536486743}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1636803824 stripped
@@ -603,9 +605,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Power
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 1961043252}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: YawFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: RollFactor
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PitchFactor
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: mainController
+      value: 
+      objectReference: {fileID: 8343037594536486744}
+    - target: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: InvertDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037594129472669, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.08
@@ -615,9 +641,33 @@ PrefabInstance:
       value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Power
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 716160975}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: YawFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: RollFactor
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PitchFactor
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: mainController
+      value: 
+      objectReference: {fileID: 8343037594536486744}
+    - target: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: InvertDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037594275394485, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.08
@@ -671,6 +721,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Computer
+      value: 
+      objectReference: {fileID: 615944582}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -679,8 +733,60 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 93930054}
     - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: ThrottleValue
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: UseROSCommands
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: ThrottleIncrease
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Motors.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Motors.Array.data[0]
+      value: 
+      objectReference: {fileID: 8343037594536486748}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Motors.Array.data[1]
+      value: 
+      objectReference: {fileID: 8343037594536486747}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Motors.Array.data[2]
+      value: 
+      objectReference: {fileID: 8343037594536486746}
+    - target: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Motors.Array.data[3]
+      value: 
+      objectReference: {fileID: 8343037594536486745}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: RollLimit
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PitchLimit
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PidRoll.dFactor
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PidRoll.pFactor
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PidPitch.dFactor
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PidPitch.pFactor
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594343694439, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: PidThrottle.pFactor
@@ -703,9 +809,33 @@ PrefabInstance:
       value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Power
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 1120803645}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: YawFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: RollFactor
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PitchFactor
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: mainController
+      value: 
+      objectReference: {fileID: 8343037594536486744}
+    - target: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: InvertDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037594517727197, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -723,9 +853,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: Power
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: Propeller
       value: 
       objectReference: {fileID: 1116391869}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: YawFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: RollFactor
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: PitchFactor
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: mainController
+      value: 
+      objectReference: {fileID: 8343037594536486744}
+    - target: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+      propertyPath: InvertDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8343037595889974450, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.08
@@ -736,3 +890,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+--- !u!114 &8343037594536486744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594343694438, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615944580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6726182dcce25624ab166567fefb8824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8343037594536486745 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594129472668, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0fde5ab4e2b634d952d833eef76fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8343037594536486746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594440864055, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0fde5ab4e2b634d952d833eef76fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8343037594536486747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037594275394484, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0fde5ab4e2b634d952d833eef76fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8343037594536486748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8343037595889974449, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
+  m_PrefabInstance: {fileID: 8343037594536486743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0fde5ab4e2b634d952d833eef76fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
