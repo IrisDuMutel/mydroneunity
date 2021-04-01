@@ -53,7 +53,6 @@ public class Controller : MonoBehaviour
         pitch_command = data.pitch;
         yaw_command = data.yaw;
         h_vel_command = data.h_vel;
-
     }
 
     void Update()
