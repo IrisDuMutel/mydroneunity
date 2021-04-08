@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RosMessageTypes;
-using Twist = RosMessageTypes.Geometry.Twist;
+using Twi = RosMessageTypes.Geometry.Twist;
 
 using RosMessageTypes.RoboticsDemo;
 
@@ -46,11 +46,11 @@ public class Controller : MonoBehaviour
     {
         if (BasicControl.UseROSCommands)
         {
-            ROSConnection.instance.Subscribe<Twist>("QuadCommands", Comm_callback);
+            ROSConnection.instance.Subscribe<Twi>("QuadCommands", Comm_callback);
         }
     }
     
-    void Comm_callback(Twist data)
+    void Comm_callback(Twi data)
     {
         // roll_command  = data.roll;
         // pitch_command = data.pitch;
