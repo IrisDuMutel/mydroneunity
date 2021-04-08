@@ -52,17 +52,18 @@ public class OdometryPub : MonoBehaviour
                           .00, 0.00, 0.00, 0.10, 0.00, 0.00,
                           .00, 0.00, 0.00, 0.00, 0.10, 0.00,
                           0.00, 0.00, 0.00, 0.00, 0.00, 0.10};
-            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(_transform.transform.position.x, _transform.transform.position.y, _transform.transform.position.z);
+            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(-1f * _transform.transform.position.z, _transform.transform.position.x, _transform.transform.position.y);
             RosMessageTypes.Geometry.Quaternion orientation = new RosMessageTypes.Geometry.Quaternion(
             _transform.transform.eulerAngles.z,
             _transform.transform.eulerAngles.x,
             _transform.transform.eulerAngles.y,
             0);
-            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(Mathf.Abs(rb.velocity[2]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.y)) + Mathf.Abs(rb.velocity[0]*Mathf.Sin((Mathf.PI / 180)*_transform.transform.eulerAngles.y)),
-                                                                                            rb.velocity[0],
-                                                                                            rb.velocity[1]);
+            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.x)*(-1f*rb.velocity[2]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.y) - rb.velocity[0]*Mathf.Sin((Mathf.PI / 180)*_transform.transform.eulerAngles.y)),
+                                                                                            Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.z)*(-1f*rb.velocity[2]*Mathf.Sin((Mathf.PI / 180)*_transform.transform.eulerAngles.y) + rb.velocity[0]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.y)),
+                                                                                            rb.velocity[1]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.z)*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.x));
             RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(rb.angularVelocity[2],rb.angularVelocity[0],rb.angularVelocity[1]);
-
+            Matrix4x4 aa = transform.localToWorldMatrix;
+             
 
             RosMessageTypes.Geometry.Pose pose = new RosMessageTypes.Geometry.Pose(position, orientation);
             RosMessageTypes.Geometry.Twist twist = new RosMessageTypes.Geometry.Twist(linear, angular);
