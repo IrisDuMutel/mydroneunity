@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44658828, g: 0.49642313, b: 0.57482547, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,7 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 615944581}
-  _transform: {fileID: 1636803824}
+  _IRFtransform: {fileID: 2101488133}
+  _BRFtransform: {fileID: 1467243983}
   cube: {fileID: 615944580}
   publishMessageFrequency: 0.1
 --- !u!1 &705507993
@@ -506,6 +507,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8343037595691710103, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
   m_PrefabInstance: {fileID: 8343037594536486743}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1467243982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467243983}
+  m_Layer: 0
+  m_Name: BodyRF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1467243983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467243982}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 0.06316471, z: 0.019999899}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1636803824}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!4 &1636803824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8343037594343694437, guid: 03113f9db7de24148944d7895c265bc2, type: 3}
@@ -715,7 +746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101488132}
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -0.012, y: 0.06316471, z: 0.019999899}
+  m_LocalPosition: {x: 0, y: 0.06316471, z: 0.019999899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1636803824}
@@ -734,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transform: {fileID: 2101488133}
-  drone_trans: {fileID: 1636803824}
+  drone_body: {fileID: 1636803824}
 --- !u!1001 &8343037594536486743
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,15 +14,25 @@ public class OdometryPub : MonoBehaviour
     // The GameObject 
     // public BoxCollider _transform;
     public Rigidbody rb;
-    public Transform _transform;
+    // public Rigidbody IRFrb;
+    // public Transform _IRFtransform;
+    public Transform _BRFtransform;
     // Publish the _transform's position and rotation every N seconds
     public GameObject cube;
-    public float publishMessageFrequency = 0.5f;
+    public float publishMessageFrequency = 0.1f;
+    private float lastPosition_x ;
+    private float lastPosition_y ;
+    private float lastPosition_z ;
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
     void Start()
     {
+        // Initialization
+
+        lastPosition_x = _BRFtransform.position.x;
+        lastPosition_y = _BRFtransform.position.y;
+        lastPosition_z = _BRFtransform.position.z;   
         // start the ROS connection
         ros = ROSConnection.instance;
         flag = 1;
@@ -52,17 +62,29 @@ public class OdometryPub : MonoBehaviour
                           .00, 0.00, 0.00, 0.10, 0.00, 0.00,
                           .00, 0.00, 0.00, 0.00, 0.10, 0.00,
                           0.00, 0.00, 0.00, 0.00, 0.00, 0.10};
-            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(-1f * _transform.transform.position.z, _transform.transform.position.x, _transform.transform.position.y);
+            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point( -_BRFtransform.transform.position.z, -_BRFtransform.transform.position.x, _BRFtransform.transform.position.y);
             RosMessageTypes.Geometry.Quaternion orientation = new RosMessageTypes.Geometry.Quaternion(
-            _transform.transform.eulerAngles.z,
-            _transform.transform.eulerAngles.x,
-            _transform.transform.eulerAngles.y,
-            0);
-            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.x)*(-1f*rb.velocity[2]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.y) - rb.velocity[0]*Mathf.Sin((Mathf.PI / 180)*_transform.transform.eulerAngles.y)),
-                                                                                            Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.z)*(-1f*rb.velocity[2]*Mathf.Sin((Mathf.PI / 180)*_transform.transform.eulerAngles.y) + rb.velocity[0]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.y)),
-                                                                                            rb.velocity[1]*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.z)*Mathf.Cos((Mathf.PI / 180)*_transform.transform.eulerAngles.x));
+            _BRFtransform.rotation.x,
+            _BRFtransform.rotation.y,
+            _BRFtransform.rotation.z,
+            _BRFtransform.rotation.w);
+                        
+
+            // At each frame:
+
+            float velocity_x = (_BRFtransform.position.x - lastPosition_x) / Time.deltaTime;
+            float velocity_y = (_BRFtransform.position.y - lastPosition_y) / Time.deltaTime;
+            float velocity_z = (_BRFtransform.position.z - lastPosition_z) / Time.deltaTime;
+
+
+            lastPosition_x = _BRFtransform.position.x;
+            lastPosition_y = _BRFtransform.position.y;
+            lastPosition_z = _BRFtransform.position.z;
+            
+            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(-velocity_z,
+                                                                                           -velocity_x,
+                                                                                           -velocity_y);
             RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(rb.angularVelocity[2],rb.angularVelocity[0],rb.angularVelocity[1]);
-            Matrix4x4 aa = transform.localToWorldMatrix;
              
 
             RosMessageTypes.Geometry.Pose pose = new RosMessageTypes.Geometry.Pose(position, orientation);
