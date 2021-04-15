@@ -8,34 +8,29 @@ using Odometry = RosMessageTypes.Nav.Odometry;
 using Header = RosMessageTypes.Std.Header;
 public class OdometryPub : MonoBehaviour
 {
+
+    public Rigidbody rb;
+    public Transform transf;
     ROSConnection ros;
     private string topicName="odom";
     private uint flag;
-    // The GameObject 
-    // public BoxCollider _transform;
-    public Rigidbody rb;
-    // public Rigidbody IRFrb;
-    // public Transform _IRFtransform;
-    public Transform _BRFtransform;
-    // Publish the _transform's position and rotation every N seconds
+    private Quaternion orient;
+    private Vector3 posit;
+    private Vector3 lin_vel;
+    private Vector3 ang_vel;
+    // Publish the transf's position and rotation every N seconds
     public GameObject cube;
-    public float publishMessageFrequency = 0.1f;
-    private float lastPosition_x ;
-    private float lastPosition_y ;
-    private float lastPosition_z ;
+    public RFHandTransform RFtrans;
+    public float publishMessageFrequency = 0.5f;
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
 
     void Start()
     {
-        // Initialization
-
-        lastPosition_x = _BRFtransform.position.x;
-        lastPosition_y = _BRFtransform.position.y;
-        lastPosition_z = _BRFtransform.position.z;   
         // start the ROS connection
         ros = ROSConnection.instance;
         flag = 1;
+        
     }
 
     private void Update()
@@ -44,6 +39,7 @@ public class OdometryPub : MonoBehaviour
 
         if (timeElapsed > publishMessageFrequency)
         {
+
             // Initialization
             RosMessageTypes.Std.UInt32 seq = new RosMessageTypes.Std.UInt32(flag);
             RosMessageTypes.Std.Time tiempo = new RosMessageTypes.Std.Time((uint)Time.time, (uint)Time.time);
@@ -62,29 +58,17 @@ public class OdometryPub : MonoBehaviour
                           .00, 0.00, 0.00, 0.10, 0.00, 0.00,
                           .00, 0.00, 0.00, 0.00, 0.10, 0.00,
                           0.00, 0.00, 0.00, 0.00, 0.00, 0.10};
-            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point( -_BRFtransform.transform.position.z, -_BRFtransform.transform.position.x, _BRFtransform.transform.position.y);
+            (orient,posit,lin_vel,ang_vel) = RFtrans.Left2Right(transf,rb);
+            RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(posit[0],posit[1],posit[2]);
             RosMessageTypes.Geometry.Quaternion orientation = new RosMessageTypes.Geometry.Quaternion(
-            _BRFtransform.rotation.x,
-            _BRFtransform.rotation.y,
-            _BRFtransform.rotation.z,
-            _BRFtransform.rotation.w);
-                        
+            orient.x,
+            orient.y,
+            orient.z,
+            orient.w
 
-            // At each frame:
-
-            float velocity_x = (_BRFtransform.position.x - lastPosition_x) / Time.deltaTime;
-            float velocity_y = (_BRFtransform.position.y - lastPosition_y) / Time.deltaTime;
-            float velocity_z = (_BRFtransform.position.z - lastPosition_z) / Time.deltaTime;
-
-
-            lastPosition_x = _BRFtransform.position.x;
-            lastPosition_y = _BRFtransform.position.y;
-            lastPosition_z = _BRFtransform.position.z;
-            
-            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(-velocity_z,
-                                                                                           -velocity_x,
-                                                                                           -velocity_y);
-            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(rb.angularVelocity[2],rb.angularVelocity[0],rb.angularVelocity[1]);
+            );
+            RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(lin_vel[0],lin_vel[1],lin_vel[2]);
+            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
              
 
             RosMessageTypes.Geometry.Pose pose = new RosMessageTypes.Geometry.Pose(position, orientation);
@@ -100,7 +84,7 @@ public class OdometryPub : MonoBehaviour
 
             
             ) ;
-            // _transform.GetWorldPose(out _pos, out _rot);
+            // transf.GetWorldPose(out _pos, out _rot);
             // Finally send the message to server_endpoint.py running in ROS
             ros.Send(topicName, targetPos);
 
