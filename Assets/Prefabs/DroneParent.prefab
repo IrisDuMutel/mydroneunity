@@ -53,7 +53,7 @@ MonoBehaviour:
   PitchFactor: -0.05
   RollFactor: -0.05
   Mass: 0
-  mainController: {fileID: 8343037594343694438}
+  mainController: {fileID: 0}
   Propeller: {fileID: 8823883851652091212}
 --- !u!1 &8343037594275394486
 GameObject:
@@ -108,7 +108,7 @@ MonoBehaviour:
   PitchFactor: 0.05
   RollFactor: 0.05
   Mass: 0
-  mainController: {fileID: 8343037594343694438}
+  mainController: {fileID: 0}
   Propeller: {fileID: 2392062291192831914}
 --- !u!1 &8343037594343694457
 GameObject:
@@ -119,8 +119,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8343037594343694437}
-  - component: {fileID: 8343037594343694438}
-  - component: {fileID: 8343037594343694439}
   - component: {fileID: 8343037594343694456}
   m_Layer: 0
   m_Name: DroneParent
@@ -148,63 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8343037594343694438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343037594343694457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6726182dcce25624ab166567fefb8824, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Controller: {fileID: 0}
-  ThrottleIncrease: 4
-  Motors:
-  - {fileID: 8343037595889974449}
-  - {fileID: 8343037594275394484}
-  - {fileID: 8343037594440864055}
-  - {fileID: 8343037594129472668}
-  ThrottleValue: 0
-  Computer: {fileID: 8343037594343694439}
---- !u!114 &8343037594343694439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343037594343694457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e1ee27c892549478c3d6220211c5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PitchLimit: 30
-  RollLimit: 30
-  PidThrottle:
-    pFactor: 0.5
-    iFactor: 0
-    dFactor: 0
-  PidPitch:
-    pFactor: 0.04
-    iFactor: 0
-    dFactor: 0.005
-  PidRoll:
-    pFactor: 0.04
-    iFactor: 0
-    dFactor: 0.005
-  Gyro:
-    Pitch: 0
-    Roll: 0
-    Yaw: 0
-    Altitude: 0
-    VelocityVector: {x: 0, y: 0, z: 0}
-    VelocityScalar: 0
-  PitchCorrection: 0
-  RollCorrection: 0
-  HeightCorrection: 0
 --- !u!54 &8343037594343694456
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -369,7 +310,7 @@ MonoBehaviour:
   PitchFactor: -0.05
   RollFactor: 0.05
   Mass: 0
-  mainController: {fileID: 8343037594343694438}
+  mainController: {fileID: 0}
   Propeller: {fileID: 4997058172117545664}
 --- !u!1 &8343037594517727197
 GameObject:
@@ -709,7 +650,7 @@ MonoBehaviour:
   PitchFactor: 0.05
   RollFactor: -0.05
   Mass: 0
-  mainController: {fileID: 8343037594343694438}
+  mainController: {fileID: 0}
   Propeller: {fileID: 8806809980618408051}
 --- !u!1001 &8543019585502886169
 PrefabInstance:
