@@ -39,7 +39,7 @@ public class RFHandTransform : MonoBehaviour
 
     }
 
-    public (Quaternion orient, Vector3 posit, Vector3 lin_vel, Vector3 ang_vel) Left2Right(Transform _transf, Rigidbody _rigidB)
+    public (Quaternion orient, Vector3 posit, Vector3 lin_vel, Vector3 ang_vel) Left2Right(Transform _transf, Vector3 inert_linvel, Rigidbody _rigidB)
     {
         
         
@@ -54,8 +54,8 @@ public class RFHandTransform : MonoBehaviour
         posit = new Vector3(pos[0],pos[2],pos[1]);
 
         // Velocity lin
-        var vel = _rigidB.velocity;
-        lin_vel = new Vector3(vel[0],vel[2],vel[1]);
+        // var vel = _rigidB.velocity;
+        lin_vel = new Vector3(inert_linvel[0],inert_linvel[2],inert_linvel[1]);
 
         // Velocity ang
         var ang = _rigidB.angularVelocity;

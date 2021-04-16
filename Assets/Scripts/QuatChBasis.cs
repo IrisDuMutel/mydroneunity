@@ -23,7 +23,11 @@ public class QuatChBasis : MonoBehaviour
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(_transf.position,_transf.position+new Vector3(1,0,0));
+        Gizmos.DrawLine(_transf.position,_transf.position+new Vector3((float)0.5,0,0));
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(_transf.position,_transf.position+new Vector3(0,0,(float)0.5));
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(_transf.position,_transf.position+new Vector3(0,(float)0.5,0));
         
     }
 }

@@ -9,8 +9,9 @@ using Header = RosMessageTypes.Std.Header;
 public class OdometryPub : MonoBehaviour
 {
 
-    public Rigidbody rb;
-    public Transform transf;
+    public Rigidbody _RigidBody;
+    public Transform BodyTransform;
+    public Transform InertialTransform;
     ROSConnection ros;
     private string topicName="odom";
     private uint flag;
@@ -18,9 +19,11 @@ public class OdometryPub : MonoBehaviour
     private Vector3 posit;
     private Vector3 lin_vel;
     private Vector3 ang_vel;
-    // Publish the transf's position and rotation every N seconds
+    // Publish the BodyTransform's position and rotation every N seconds
     public GameObject cube;
     public RFHandTransform RFtrans;
+    private Vector3 last_pos;
+    private Vector3 inert_linvel;
     public float publishMessageFrequency = 0.5f;
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
@@ -28,6 +31,7 @@ public class OdometryPub : MonoBehaviour
     void Start()
     {
         // start the ROS connection
+        last_pos = InertialTransform.position;
         ros = ROSConnection.instance;
         flag = 1;
         
@@ -43,7 +47,7 @@ public class OdometryPub : MonoBehaviour
             // Initialization
             RosMessageTypes.Std.UInt32 seq = new RosMessageTypes.Std.UInt32(flag);
             RosMessageTypes.Std.Time tiempo = new RosMessageTypes.Std.Time((uint)Time.time, (uint)Time.time);
-            string frame_id = rb.name;
+            string frame_id = _RigidBody.name;
             Header header = new Header(flag, tiempo, frame_id);
             RosMessageTypes.Std.Float64 cov = new RosMessageTypes.Std.Float64(0);
             //Header header;
@@ -58,15 +62,23 @@ public class OdometryPub : MonoBehaviour
                           .00, 0.00, 0.00, 0.10, 0.00, 0.00,
                           .00, 0.00, 0.00, 0.00, 0.10, 0.00,
                           0.00, 0.00, 0.00, 0.00, 0.00, 0.10};
-            (orient,posit,lin_vel,ang_vel) = RFtrans.Left2Right(transf,rb);
+
+            // Computation of the linear velocity of the inertial RF
+            if(last_pos != InertialTransform.position) {
+                inert_linvel = InertialTransform.position - last_pos;
+                inert_linvel /= Time.deltaTime;
+                last_pos = InertialTransform.position;
+            }
+            // transformation to right hand RF with correct orientation (z upwards)
+            (orient,posit,lin_vel,ang_vel) = RFtrans.Left2Right(BodyTransform,inert_linvel,_RigidBody);
             RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(posit[0],posit[1],posit[2]);
             RosMessageTypes.Geometry.Quaternion orientation = new RosMessageTypes.Geometry.Quaternion(
             orient.x,
             orient.y,
             orient.z,
             orient.w
-
             );
+            // For now, linear velocity is given in inertial reference frame
             RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(lin_vel[0],lin_vel[1],lin_vel[2]);
             RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
              
@@ -84,7 +96,7 @@ public class OdometryPub : MonoBehaviour
 
             
             ) ;
-            // transf.GetWorldPose(out _pos, out _rot);
+            // BodyTransform.GetWorldPose(out _pos, out _rot);
             // Finally send the message to server_endpoint.py running in ROS
             ros.Send(topicName, targetPos);
 
