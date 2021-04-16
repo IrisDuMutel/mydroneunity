@@ -76,6 +76,15 @@ public class RFHandTransform : MonoBehaviour
         _rb.AddForceAtPosition(_transform.up * forces.y, _frMotor.position, ForceMode.Impulse);
         _rb.AddForceAtPosition(_transform.up * forces.z, _rlMotor.position, ForceMode.Impulse);
         _rb.AddForceAtPosition(_transform.up * forces.w, _rrMotor.position, ForceMode.Impulse);
+        _rb.AddTorque(_transform.up*-1f*yaw,ForceMode.Force);
+
+        //motor animation:
+        
+        _flMotor.RotateAround(_flMotor.position, _flMotor.up, -forces.x + 2500 * Time.deltaTime);
+        _frMotor.RotateAround(_frMotor.position, _frMotor.up, forces.y + 2500 * Time.deltaTime);
+        _rlMotor.RotateAround(_rlMotor.position, _rlMotor.up, forces.z + 2500 * Time.deltaTime);
+        _rrMotor.RotateAround(_rrMotor.position, _rrMotor.up, -forces.w + 2500 * Time.deltaTime);
+
         // // Velocity lin
         // var vel = _rb.velocity;
         // _rb.velocity = new Vector3(vel[0],vel[2],vel[1]);
