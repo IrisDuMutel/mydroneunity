@@ -72,10 +72,10 @@ public class RFHandTransform : MonoBehaviour
         // // Position
         // _transform.position = new Vector3(pos[0],pos[2],pos[1]);
 
-        _rb.AddForceAtPosition(_transform.up * forces.x, _flMotor.position, ForceMode.Impulse);
-        _rb.AddForceAtPosition(_transform.up * forces.y, _frMotor.position, ForceMode.Impulse);
-        _rb.AddForceAtPosition(_transform.up * forces.z, _rlMotor.position, ForceMode.Impulse);
-        _rb.AddForceAtPosition(_transform.up * forces.w, _rrMotor.position, ForceMode.Impulse);
+        _rb.AddForceAtPosition(_flMotor.up * forces.x, _flMotor.position, ForceMode.Force);
+        _rb.AddForceAtPosition(_frMotor.up * forces.y, _frMotor.position, ForceMode.Force);
+        _rb.AddForceAtPosition(_rlMotor.up * forces.z, _rlMotor.position, ForceMode.Force);
+        _rb.AddForceAtPosition(_rrMotor.up * forces.w, _rrMotor.position, ForceMode.Force);
         _rb.AddTorque(_transform.up*-1f*yaw,ForceMode.Force);
 
         //motor animation:
