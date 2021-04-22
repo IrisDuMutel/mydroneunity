@@ -36,13 +36,13 @@ public class OdometryPub : MonoBehaviour
         flag = 1;
         
     }
-
-    private void Update()
+    private void FixedUpdate()
     {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed > publishMessageFrequency)
-        {
+        
+        // timeElapsed += Time.deltaTime;
+        // Debug.Log(Time.fixedDeltaTime);
+        // if (timeElapsed > publishMessageFrequency)
+        // {
 
             // Initialization
             RosMessageTypes.Std.UInt32 seq = new RosMessageTypes.Std.UInt32(flag);
@@ -101,6 +101,6 @@ public class OdometryPub : MonoBehaviour
             ros.Send(topicName, targetPos);
 
             timeElapsed = 0;
-        }
+        // }
     }
 }
