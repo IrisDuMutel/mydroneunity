@@ -307,7 +307,7 @@ MonoBehaviour:
   InertialTransform: {fileID: 2101488133}
   cube: {fileID: 615944580}
   RFtrans: {fileID: 1063748481}
-  publishMessageFrequency: 0.00001
+  publishMessageFrequency: 0.02
 --- !u!114 &615944585
 MonoBehaviour:
   m_ObjectHideFlags: 0
