@@ -39,12 +39,12 @@ public class OdometryPub : MonoBehaviour
         
     }
     void Awake () {
-        #if UNITY_EDITOR
+        // #if UNITY_EDITOR
         QualitySettings.vSyncCount = 0;  // VSync must be disabled
         Application.targetFrameRate = 30; // Set the framerate you want and check it iunder 'stats' during in gamemode
-        #endif
+        // #endif
     }
-    private void Update()
+    private void FixedUpdate()
     {
         
         // timeElapsed += Time.deltaTime;
