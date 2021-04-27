@@ -24,6 +24,7 @@ public class OdometryPub : MonoBehaviour
     public RFHandTransform RFtrans;
     private Vector3 last_pos;
     private Vector3 inert_linvel;
+    private float lastVelocity = 0.0f;
     public float publishMessageFrequency = 0.5f;
     // Used to determine how much time has elapsed since the last message was published
     private float timeElapsed;
@@ -87,8 +88,11 @@ public class OdometryPub : MonoBehaviour
             orient.w
             );
             // For now, linear velocity is given in inertial reference frame
+            float acceleration = (_RigidBody.velocity[1] - lastVelocity) / Time.fixedDeltaTime;
+            lastVelocity = _RigidBody.velocity[1];
+            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(acceleration,acceleration,acceleration);
             RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(lin_vel[0],lin_vel[1],lin_vel[2]);
-            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
+            // RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
              
 
             RosMessageTypes.Geometry.Pose pose = new RosMessageTypes.Geometry.Pose(position, orientation);
