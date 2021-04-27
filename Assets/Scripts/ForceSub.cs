@@ -55,7 +55,7 @@ public class ForceSub : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         // _rftrans.Right2Left(_transform,_rb,pos,rot,vel, ang);

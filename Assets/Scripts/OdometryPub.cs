@@ -31,18 +31,26 @@ public class OdometryPub : MonoBehaviour
     void Start()
     {
         // start the ROS connection
+        // QualitySettings.vSyncCount = 1;
+        // Application.targetFrameRate = 30;
         last_pos = InertialTransform.position;
         ros = ROSConnection.instance;
         flag = 1;
         
     }
-
-    private void Update()
+    void Awake () {
+        // #if UNITY_EDITOR
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 30; // Set the framerate you want and check it iunder 'stats' during in gamemode
+        // #endif
+    }
+    private void FixedUpdate()
     {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed > publishMessageFrequency)
-        {
+        
+        // timeElapsed += Time.deltaTime;
+        // Debug.Log(Time.fixedDeltaTime);
+        // if (timeElapsed > publishMessageFrequency)
+        // { 
 
             // Initialization
             RosMessageTypes.Std.UInt32 seq = new RosMessageTypes.Std.UInt32(flag);
@@ -101,6 +109,6 @@ public class OdometryPub : MonoBehaviour
             ros.Send(topicName, targetPos);
 
             timeElapsed = 0;
-        }
+        // }
     }
 }
