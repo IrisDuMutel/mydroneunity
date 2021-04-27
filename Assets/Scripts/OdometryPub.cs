@@ -88,11 +88,12 @@ public class OdometryPub : MonoBehaviour
             orient.w
             );
             // For now, linear velocity is given in inertial reference frame
+            // acceleration on z for debugging
             float acceleration = (_RigidBody.velocity[1] - lastVelocity) / Time.fixedDeltaTime;
             lastVelocity = _RigidBody.velocity[1];
-            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(acceleration,acceleration,acceleration);
+            // RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(acceleration,acceleration,acceleration);
             RosMessageTypes.Geometry.Vector3 linear = new RosMessageTypes.Geometry.Vector3(lin_vel[0],lin_vel[1],lin_vel[2]);
-            // RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
+            RosMessageTypes.Geometry.Vector3 angular = new RosMessageTypes.Geometry.Vector3(ang_vel[0],ang_vel[1],ang_vel[2]);
              
 
             RosMessageTypes.Geometry.Pose pose = new RosMessageTypes.Geometry.Pose(position, orientation);
