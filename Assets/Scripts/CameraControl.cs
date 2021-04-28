@@ -14,7 +14,7 @@ public class CameraControl : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   _transform.position = new Vector3(drone_trans.position.x,drone_trans.position.y + 0.197f,drone_trans.position.z+1f );
-        _transform.eulerAngles = new Vector3(0.0f,180f,0.0f);
+    {   _transform.position = new Vector3(drone_trans.position.x-1f ,drone_trans.position.y + 0.197f,drone_trans.position.z);
+        _transform.eulerAngles = new Vector3(0.0f,90f,0.0f);
     }
 }
