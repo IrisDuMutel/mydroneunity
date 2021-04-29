@@ -59,7 +59,7 @@ public class RFHandTransform : MonoBehaviour
 
         // Velocity ang
         var ang = _rigidB.angularVelocity;
-        ang_vel = new Vector3(1f*ang[0],1f*ang[2],1f*ang[1]);
+        ang_vel = new Vector3(-1f*ang[0],-1f*ang[2],1f*ang[1]);
 
         return (orient,posit,lin_vel,ang_vel);
     }

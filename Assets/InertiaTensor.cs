@@ -11,5 +11,6 @@ public class InertiaTensor : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.inertiaTensor = new Vector3(0.002078f,0.001266f,0.002941f);
+        rb.centerOfMass = new Vector3(0.0f,0.0f,0.0f);
     }
 }
