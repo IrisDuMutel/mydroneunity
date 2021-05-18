@@ -15,7 +15,9 @@ public class OdometryPub : MonoBehaviour
     ROSConnection ros;
     private string topicName="odom";
     private uint flag;
+    
     private Quaternion orient;
+    private Quaternion eul_ang;
     private Vector3 posit;
     private Vector3 lin_vel;
     private Vector3 ang_vel;
@@ -79,9 +81,13 @@ public class OdometryPub : MonoBehaviour
                 last_pos = InertialTransform.position;
             }
             // transformation to right hand RF with correct orientation (z upwards)
-            (orient,posit,lin_vel,ang_vel) = RFtrans.Left2Right(BodyTransform,inert_linvel,_RigidBody);
+            (orient,eul_ang,posit,lin_vel,ang_vel) = RFtrans.Left2Right(BodyTransform,inert_linvel,_RigidBody);
             RosMessageTypes.Geometry.Point position = new RosMessageTypes.Geometry.Point(posit[0],posit[1],posit[2]);
             RosMessageTypes.Geometry.Quaternion orientation = new RosMessageTypes.Geometry.Quaternion(
+            // eul_ang.x,
+            // eul_ang.y,
+            // eul_ang.z,
+            // eul_ang.w
             orient.x,
             orient.y,
             orient.z,

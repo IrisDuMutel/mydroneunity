@@ -6,6 +6,7 @@ public class RFHandTransform : MonoBehaviour
 {
 
     private Quaternion orient;
+    private Quaternion eul_ang;
     private Vector3 posit;
     private Vector3 lin_vel;
     private Vector3 ang_vel;
@@ -39,14 +40,14 @@ public class RFHandTransform : MonoBehaviour
 
     }
 
-    public (Quaternion orient, Vector3 posit, Vector3 lin_vel, Vector3 ang_vel) Left2Right(Transform _transf, Vector3 inert_linvel, Rigidbody _rigidB)
+    public (Quaternion orient, Quaternion eul_ang, Vector3 posit, Vector3 lin_vel, Vector3 ang_vel) Left2Right(Transform _transf, Vector3 inert_linvel, Rigidbody _rigidB)
     {
         
         
         // Orientation
 
         var rot = _transf.rotation;
-        Debug.Log(rot);
+        // Debug.Log(rot);
         orient = new Quaternion(-1f*rot.x,-1f*rot.z,-1f*rot.y,rot.w);
 
         // Position
@@ -61,7 +62,10 @@ public class RFHandTransform : MonoBehaviour
         var ang = _rigidB.angularVelocity;
         ang_vel = new Vector3(-1f*ang[0],-1f*ang[2],1f*ang[1]);
 
-        return (orient,posit,lin_vel,ang_vel);
+        // Euler Angles
+        eul_ang = new Quaternion(rot.eulerAngles.x, rot.eulerAngles.z, -rot.eulerAngles.y,0);
+
+        return (orient, eul_ang, posit,lin_vel,ang_vel);
     }
 
     public void ForceOnLeft(Transform _transform, Rigidbody _rb , Vector4 forces, float yaw)
